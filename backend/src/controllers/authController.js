@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import { generateToken } from "../lib/utils.js"
 
 export const signup = async (req, res) => {
-    const { fullName, email, password } = req.body || {};
+    const { fullName, email, password } = req.body;
     try {
         if(!fullName || !email || !password){
             return res.status(400).json({ message: "All fields are required" });
@@ -13,7 +13,8 @@ export const signup = async (req, res) => {
             return res.status(400).json({ message: "Password must be at least 6 characters long" });
         }
         const user = await User.findOne({ email });
-        if (user) return res.stats(400).json({ message: "Email already exists" });
+
+        if (user) return res.status(400).json({ message: "Email already exists" });
 
         const salt = await bcrypt.genSalt(10)
         const hashedPassword = await bcrypt.hash(password,salt);
@@ -33,7 +34,7 @@ export const signup = async (req, res) => {
                 fullName: newUser.fullName,
                 email: newUser.email,
                 profilePic: newUser.profilePic,
-            })
+            });
         }else{
             res.status(400).json({ message: "Invalid user data "});
         }
