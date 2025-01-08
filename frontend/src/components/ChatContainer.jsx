@@ -14,7 +14,7 @@ const ChatContainer = () => {
         isMessagesLoading,
         selectedUser,
         subscribeToMessages,
-        unsubscribeFromMessages,
+        unSubscribeFromMessages,
     } = useChatStore();
     const { authUser } = useAuthStore();
     const messageEndRef = useRef(null);
@@ -23,8 +23,8 @@ const ChatContainer = () => {
         getMessages(selectedUser._id);
         subscribeToMessages();
 
-        return() => unsubscribeFromMessages();
-    }, [selectedUser._id, getMessages, subscribeToMessages, unsubscribeFromMessages])
+        return() => unSubscribeFromMessages();
+    }, [selectedUser._id, getMessages, subscribeToMessages, unSubscribeFromMessages])
 
     useEffect(() => {
         if (messageEndRef.current && messages) {
@@ -32,7 +32,7 @@ const ChatContainer = () => {
         }
     }, [messages]);
 
-    if(isMessagesLoading){
+    if(isMessagesLoading) {
         return (
             <div className="flex-1 flex flex-col overflow-auto">
                 <ChatHeader />
