@@ -1,4 +1,4 @@
-import { THEMES } from "../constants";
+import { THEMES } from "../constants/index.js";
 import { useThemeStore } from "../store/useThemeStore";
 import { Send } from "lucide-react";
 
@@ -7,7 +7,7 @@ const PREVIEW_MESSAGES = [
   {id: 2, content: "I'm doing great, just working at the moment.", isSent: true},
 ];
 
-const Settings = () => {
+const SettingsPage = () => {
   const { theme, setTheme } = useThemeStore();
 
   return (
@@ -110,4 +110,4 @@ const Settings = () => {
   )
 }
 
-export default Settings
+export default SettingsPage
