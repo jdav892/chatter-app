@@ -21,11 +21,12 @@ export function getReceiverSocketId(userId){
 const userSocketMap = {} //{userId: socketId}
 
 io.on("connection", (socket) => {
-    console.log("A user connected", socket.io);
+    console.log("A user connected", socket.id);
 
     const userId = socket.handshake.query.userId;
     if (userId) userSocketMap[userId] = socket.id;
 
+    //Sending getOnlineUsers to all connected clients
     io.emit("getOnlineUsers", Object.keys(userSocketMap));
 
     socket.on("disconnect", () => {
